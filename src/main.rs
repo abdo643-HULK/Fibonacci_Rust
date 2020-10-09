@@ -3,10 +3,11 @@ fn main() {
     println!("Fibonacci generator");
     println!("Type \"q\" to end the program");
     println!();
+    
     loop {
         let mut value = String::new();
 
-        print!("Enter a positive integer: ");
+        print!("Enter a positive integer (max 93): ");
         io::stdout().flush().unwrap();
         io::stdin().read_line(&mut value).expect("Failed to read line");
 
@@ -19,29 +20,21 @@ fn main() {
             Err(_) => continue,
         };
 
-        println!("{}", fibonacci(value as u64));
-        // println!("{}", fibonacci(%value));
+        println!("{}", fibonacci(&value));
     }
 }
 
-
-fn fibonacci(num: u64) -> u64 {
-    match num {
-        0 => 0,
-        1 => 1,
-        _ => fibonacci(num - 1) + fibonacci(num - 2)
+fn fibonacci(num: &u32) -> u64 {
+    let size: usize = *num as usize + 1;
+    let mut f = vec![0; size];
+    f[1] = 1;
+    // let mut i: usize = 2;
+    for i in 2..size {
+        f[i] = f[i-1] + f[i-2];
     }
+    // while i <= size { 
+    //     i+=1;
+    //     f[i] = f[i-1] + f[i-2]; 
+    // };
+    return f[size-1];
 }
-
-// fn fibonacci(num: &u64) -> u64 {
-//     match num {
-//         0 => 0,
-//         1 => 1,
-//         _ => fibonacci(&(*num - 1)) + fibonacci(&(*num - 2))
-//     }
-// }
-
-// fn fibonacci(num: u32) -> u32 {
-//     if num < 2 { return num };
-//     return fibonacci(num - 1) + fibonacci(num - 2);
-// }
