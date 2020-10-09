@@ -19,19 +19,29 @@ fn main() {
             Err(_) => continue,
         };
 
-        println!("{}", fibonacci(value));
+        println!("{}", fibonacci(value as u64));
+        // println!("{}", fibonacci(%value));
     }
 }
 
-fn fibonacci(num: u32) -> u32 {
+
+fn fibonacci(num: u64) -> u64 {
     match num {
-        0 => 1,
+        0 => 0,
         1 => 1,
         _ => fibonacci(num - 1) + fibonacci(num - 2)
     }
 }
 
+// fn fibonacci(num: &u64) -> u64 {
+//     match num {
+//         0 => 0,
+//         1 => 1,
+//         _ => fibonacci(&(*num - 1)) + fibonacci(&(*num - 2))
+//     }
+// }
+
 // fn fibonacci(num: u32) -> u32 {
-//     if(num <= 1) { return 1 };
+//     if num < 2 { return num };
 //     return fibonacci(num - 1) + fibonacci(num - 2);
 // }
